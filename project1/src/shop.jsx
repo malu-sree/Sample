@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 function ExuseEffect() {
   const [record, setRecord] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -13,13 +15,29 @@ function ExuseEffect() {
       .catch((err) => console.log(err));
   }, []);
 
+  // Filter the records based on the search term
+  const filteredRecords = record.filter(item =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="container mt-5">
-      <div className="row">
-        {record.length > 0 &&
-          record.map((item) => {
-            return (
-              <div className="col-md-4 mb-4" key={item.id}>
+    <Container className="mt-5">
+    
+      <Row className="mb-4">
+        <Col >
+          <Form.Control
+            type="text"
+            placeholder="Search for products"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        {filteredRecords.length > 0
+          ? filteredRecords.map((item) => (
+              <Col md={4} className="mb-4" key={item.id}>
                 <div className="card h-100">
                   <img
                     src={item.image}
@@ -34,17 +52,16 @@ function ExuseEffect() {
                     </p>
                     <p className="card-text"><strong>Price:</strong> ${item.price}</p>
                     <button className="btn btn-primary">Add to Cart</button>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <button className="btn btn-primary">Buy now</button>
-
                   </div>
                 </div>
-              </div>
-            );
-          })}
-      </div>
-    </div>
+              </Col>
+            ))
+          : <p>No products found.</p>}
+      </Row>
+    </Container>
   );
 }
 

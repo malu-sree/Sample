@@ -17,7 +17,7 @@ function Footer() {
                 textAlign: 'center',
                 padding: '20px',
             }}>
-                <h3>Sign Up to Our Newsletter</h3>
+                {/* <h3>Sign Up to Our Newsletter</h3>
                 <p>Get the latest beauty secrets and trends. Sign up for our newsletter and stay informed about all things beauty.</p>
                 <input 
                     type='email' 
@@ -29,8 +29,8 @@ function Footer() {
                         textAlign: 'center',
                         marginBottom: '10px',
                     }} 
-                />
-                <button 
+                /> */}
+                {/* <button 
                     style={{
                         backgroundColor: 'lightpink',
                         borderRadius: '20px',
@@ -39,7 +39,7 @@ function Footer() {
                     }}
                 >
                     Submit
-                </button>
+                </button> */}
             </div>
 
             <div style={{
